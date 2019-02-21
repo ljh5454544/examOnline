@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.test.dao.ChooseMapper">
+  <resultMap id="BaseResultMap" type="com.exam.test.pojo.Choose">
+    <id column="ch_id" jdbcType="INTEGER" property="chId" />
+    <result column="ch_A" jdbcType="VARCHAR" property="chA" />
+    <result column="ch_B" jdbcType="VARCHAR" property="chB" />
+    <result column="ch_C" jdbcType="VARCHAR" property="chC" />
+    <result column="ch_D" jdbcType="VARCHAR" property="chD" />
+    <result column="ch_Right" jdbcType="VARCHAR" property="chRight" />
+    <result column="testpaper_id" jdbcType="INTEGER" property="testpaperId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.exam.test.pojo.Choose">
+    <result column="ch_topic" jdbcType="LONGVARCHAR" property="chTopic" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ch_id, ch_A, ch_B, ch_C, ch_D, ch_Right, testpaper_id
+  </sql>
+  <sql id="Blob_Column_List">
+    ch_topic
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from choose
+    where ch_id = #{chId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from choose
+    where ch_id = #{chId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.exam.test.pojo.Choose">
+    insert into choose (ch_id, ch_A, ch_B, 
+      ch_C, ch_D, ch_Right, 
+      testpaper_id, ch_topic)
+    values (#{chId,jdbcType=INTEGER}, #{chA,jdbcType=VARCHAR}, #{chB,jdbcType=VARCHAR}, 
+      #{chC,jdbcType=VARCHAR}, #{chD,jdbcType=VARCHAR}, #{chRight,jdbcType=VARCHAR}, 
+      #{testpaperId,jdbcType=INTEGER}, #{chTopic,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.exam.test.pojo.Choose">
+    insert into choose
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chId != null">
+        ch_id,
+      </if>
+      <if test="chA != null">
+        ch_A,
+      </if>
+      <if test="chB != null">
+        ch_B,
+      </if>
+      <if test="chC != null">
+        ch_C,
+      </if>
+      <if test="chD != null">
+        ch_D,
+      </if>
+      <if test="chRight != null">
+        ch_Right,
+      </if>
+      <if test="testpaperId != null">
+        testpaper_id,
+      </if>
+      <if test="chTopic != null">
+        ch_topic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chId != null">
+        #{chId,jdbcType=INTEGER},
+      </if>
+      <if test="chA != null">
+        #{chA,jdbcType=VARCHAR},
+      </if>
+      <if test="chB != null">
+        #{chB,jdbcType=VARCHAR},
+      </if>
+      <if test="chC != null">
+        #{chC,jdbcType=VARCHAR},
+      </if>
+      <if test="chD != null">
+        #{chD,jdbcType=VARCHAR},
+      </if>
+      <if test="chRight != null">
+        #{chRight,jdbcType=VARCHAR},
+      </if>
+      <if test="testpaperId != null">
+        #{testpaperId,jdbcType=INTEGER},
+      </if>
+      <if test="chTopic != null">
+        #{chTopic,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.exam.test.pojo.Choose">
+    update choose
+    <set>
+      <if test="chA != null">
+        ch_A = #{chA,jdbcType=VARCHAR},
+      </if>
+      <if test="chB != null">
+        ch_B = #{chB,jdbcType=VARCHAR},
+      </if>
+      <if test="chC != null">
+        ch_C = #{chC,jdbcType=VARCHAR},
+      </if>
+      <if test="chD != null">
+        ch_D = #{chD,jdbcType=VARCHAR},
+      </if>
+      <if test="chRight != null">
+        ch_Right = #{chRight,jdbcType=VARCHAR},
+      </if>
+      <if test="testpaperId != null">
+        testpaper_id = #{testpaperId,jdbcType=INTEGER},
+      </if>
+      <if test="chTopic != null">
+        ch_topic = #{chTopic,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ch_id = #{chId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.exam.test.pojo.Choose">
+    update choose
+    set ch_A = #{chA,jdbcType=VARCHAR},
+      ch_B = #{chB,jdbcType=VARCHAR},
+      ch_C = #{chC,jdbcType=VARCHAR},
+      ch_D = #{chD,jdbcType=VARCHAR},
+      ch_Right = #{chRight,jdbcType=VARCHAR},
+      testpaper_id = #{testpaperId,jdbcType=INTEGER},
+      ch_topic = #{chTopic,jdbcType=LONGVARCHAR}
+    where ch_id = #{chId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.exam.test.pojo.Choose">
+    update choose
+    set ch_A = #{chA,jdbcType=VARCHAR},
+      ch_B = #{chB,jdbcType=VARCHAR},
+      ch_C = #{chC,jdbcType=VARCHAR},
+      ch_D = #{chD,jdbcType=VARCHAR},
+      ch_Right = #{chRight,jdbcType=VARCHAR},
+      testpaper_id = #{testpaperId,jdbcType=INTEGER}
+    where ch_id = #{chId,jdbcType=INTEGER}
+  </update>
+</mapper>

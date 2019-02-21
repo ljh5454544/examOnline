@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.test.dao.TeacherMapper">
+  <resultMap id="BaseResultMap" type="com.exam.test.pojo.Teacher">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="t_username" jdbcType="VARCHAR" property="tUsername" />
+    <result column="t_name" jdbcType="VARCHAR" property="tName" />
+    <result column="t_password" jdbcType="VARCHAR" property="tPassword" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    t_id, t_username, t_name, t_password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from teacher
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.exam.test.pojo.Teacher">
+    insert into teacher (t_id, t_username, t_name, 
+      t_password)
+    values (#{tId,jdbcType=INTEGER}, #{tUsername,jdbcType=VARCHAR}, #{tName,jdbcType=VARCHAR}, 
+      #{tPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.exam.test.pojo.Teacher">
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="tUsername != null">
+        t_username,
+      </if>
+      <if test="tName != null">
+        t_name,
+      </if>
+      <if test="tPassword != null">
+        t_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tUsername != null">
+        #{tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tName != null">
+        #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null">
+        #{tPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.exam.test.pojo.Teacher">
+    update teacher
+    <set>
+      <if test="tUsername != null">
+        t_username = #{tUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tName != null">
+        t_name = #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tPassword != null">
+        t_password = #{tPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.exam.test.pojo.Teacher">
+    update teacher
+    set t_username = #{tUsername,jdbcType=VARCHAR},
+      t_name = #{tName,jdbcType=VARCHAR},
+      t_password = #{tPassword,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+</mapper>

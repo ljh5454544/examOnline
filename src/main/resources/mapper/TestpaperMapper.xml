@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exam.test.dao.TestpaperMapper">
+  <resultMap id="BaseResultMap" type="com.exam.test.pojo.Testpaper">
+    <id column="tp_id" jdbcType="INTEGER" property="tpId" />
+    <result column="tp_name" jdbcType="VARCHAR" property="tpName" />
+    <result column="tp_createtime" jdbcType="TIMESTAMP" property="tpCreatetime" />
+    <result column="tp_starttime" jdbcType="TIMESTAMP" property="tpStarttime" />
+    <result column="tp_endtime" jdbcType="TIMESTAMP" property="tpEndtime" />
+    <result column="tp_classname" jdbcType="VARCHAR" property="tpClassname" />
+    <result column="tp_status" jdbcType="INTEGER" property="tpStatus" />
+    <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tp_id, tp_name, tp_createtime, tp_starttime, tp_endtime, tp_classname, tp_status, 
+    teacher_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from testpaper
+    where tp_id = #{tpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from testpaper
+    where tp_id = #{tpId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.exam.test.pojo.Testpaper">
+    insert into testpaper (tp_id, tp_name, tp_createtime, 
+      tp_starttime, tp_endtime, tp_classname, 
+      tp_status, teacher_id)
+    values (#{tpId,jdbcType=INTEGER}, #{tpName,jdbcType=VARCHAR}, #{tpCreatetime,jdbcType=TIMESTAMP}, 
+      #{tpStarttime,jdbcType=TIMESTAMP}, #{tpEndtime,jdbcType=TIMESTAMP}, #{tpClassname,jdbcType=VARCHAR}, 
+      #{tpStatus,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.exam.test.pojo.Testpaper">
+    insert into testpaper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tpId != null">
+        tp_id,
+      </if>
+      <if test="tpName != null">
+        tp_name,
+      </if>
+      <if test="tpCreatetime != null">
+        tp_createtime,
+      </if>
+      <if test="tpStarttime != null">
+        tp_starttime,
+      </if>
+      <if test="tpEndtime != null">
+        tp_endtime,
+      </if>
+      <if test="tpClassname != null">
+        tp_classname,
+      </if>
+      <if test="tpStatus != null">
+        tp_status,
+      </if>
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tpId != null">
+        #{tpId,jdbcType=INTEGER},
+      </if>
+      <if test="tpName != null">
+        #{tpName,jdbcType=VARCHAR},
+      </if>
+      <if test="tpCreatetime != null">
+        #{tpCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tpStarttime != null">
+        #{tpStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tpEndtime != null">
+        #{tpEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tpClassname != null">
+        #{tpClassname,jdbcType=VARCHAR},
+      </if>
+      <if test="tpStatus != null">
+        #{tpStatus,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.exam.test.pojo.Testpaper">
+    update testpaper
+    <set>
+      <if test="tpName != null">
+        tp_name = #{tpName,jdbcType=VARCHAR},
+      </if>
+      <if test="tpCreatetime != null">
+        tp_createtime = #{tpCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tpStarttime != null">
+        tp_starttime = #{tpStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tpEndtime != null">
+        tp_endtime = #{tpEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tpClassname != null">
+        tp_classname = #{tpClassname,jdbcType=VARCHAR},
+      </if>
+      <if test="tpStatus != null">
+        tp_status = #{tpStatus,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null">
+        teacher_id = #{teacherId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tp_id = #{tpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.exam.test.pojo.Testpaper">
+    update testpaper
+    set tp_name = #{tpName,jdbcType=VARCHAR},
+      tp_createtime = #{tpCreatetime,jdbcType=TIMESTAMP},
+      tp_starttime = #{tpStarttime,jdbcType=TIMESTAMP},
+      tp_endtime = #{tpEndtime,jdbcType=TIMESTAMP},
+      tp_classname = #{tpClassname,jdbcType=VARCHAR},
+      tp_status = #{tpStatus,jdbcType=INTEGER},
+      teacher_id = #{teacherId,jdbcType=INTEGER}
+    where tp_id = #{tpId,jdbcType=INTEGER}
+  </update>
+</mapper>
